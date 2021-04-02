@@ -96,9 +96,15 @@
         let autorun = params.get("autorun");
 
         let start_display = function() {
+          document.body.style.lineHeight = 0;
           document.getElementById("panel").remove();
           canvas.width = window.innerWidth;
           canvas.height = window.innerHeight;
+          function windowResize() {
+            canvas.width  = window.innerWidth;
+            canvas.height = window.innerHeight;
+          };
+          window.addEventListener('resize', windowResize);
           start(canvas, params.get("module"), resource_data);
         };
 
