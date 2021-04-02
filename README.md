@@ -2,7 +2,7 @@
 
 [*Read Mojang's original announcment on the Minecraft Blog*]()
 
-A tweaked version of *Minecraft Plus!*, Mincreaft's 2021 Apirl Fool's joke.
+A tweaked version of *Minecraft Plus!*, Minecraft's 2021 April Fool's joke.
 
 ## Changes
 * URLs are now relative for rehosting
