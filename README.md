@@ -1,4 +1,4 @@
-# Minecraft Plus!
+# [Minecraft Plus!](https://undarkaido.github.io/Minecraft-Plus/)
 
 [*Read Mojang's original announcment on the Minecraft Blog*]()
 
@@ -14,7 +14,7 @@ A tweaked version of *Minecraft Plus!*, Mincreaft's 2021 Apirl Fool's joke.
 URL parameters
 * `autorun`
   * With no value it takes you striaght to the launch screen.
-  * With 'window' it opens a random module in windowed mode.
+  * With 'window' it opens a random module in windowed mode. [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window)
 * 'module'
   * With no value it defaults to `0`.
   * With a parameter it loads the specified module instead of a random one. Input is `% max`.
