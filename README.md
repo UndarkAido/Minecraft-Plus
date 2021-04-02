@@ -4,6 +4,8 @@
 
 A tweaked version of *Minecraft Plus!*, Minecraft's 2021 April Fool's joke.
 
+All copyright belongs to Mojang Studios
+
 ## Changes
 * URLs are now relative for rehosting
 * The canvas is now initially sized properly
