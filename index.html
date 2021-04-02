@@ -83,7 +83,7 @@
         swapElements("start", "status-resources");
         swapElements("header-product", "header-squid");
 
-        let resource_request = await fetch("/pkg/resources.zip");
+        let resource_request = await fetch("./pkg/resources.zip");
         let resource_data = await resource_request.arrayBuffer();
 
         swapElements("status-resources", "status-code");
@@ -150,7 +150,7 @@
 
       <div id="start" class="controls">
         <div>Thank you for choosing Minecraft Plus! as your primary source of entertainment!</div>
-        <a href="/screensaver.zip" download>Download for Desktop</a>
+        <a href="./screensaver.zip" download>Download for Desktop</a>
         <div><sub>(available only for fairly modern Windows x64)</sub></div>
         <div><sub>(<b>Note</b>: actual executable screen saver. Like we had in the 90's)</sub></div>
         <div class="alt">or</div>
