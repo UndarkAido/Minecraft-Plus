@@ -84,7 +84,8 @@
         swapElements("start", "status-resources");
         swapElements("header-product", "header-squid");
 
-        let resource_request = await fetch("./pkg/resources.zip");
+		let resources_source = params.get("resources");
+        let resource_request = await fetch(resources_source ? resources_source : "./pkg/resources.zip");
         let resource_data = await resource_request.arrayBuffer();
 
         swapElements("status-resources", "status-code");

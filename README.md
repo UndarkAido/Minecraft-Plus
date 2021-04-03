@@ -11,13 +11,14 @@ All copyright belongs to Mojang Studios
 * The canvas is now initially sized properly
 * The canvas resizes when the window does
   * The WASM can't seem to tell this is happening though.
+* Load an alternate `resources.zip` with the `resources` parameter
 
 ## Usage
 URL parameters
 * `autorun`
   * With no value it takes you striaght to the launch screen.
   * With 'window' it opens a random module in windowed mode. [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window)
-* 'module'
+* `module`
   * With no value it defaults to `0`.
   * With a parameter it loads the specified module instead of a random one. Input is `% max`.
     * `0` A rotating block with random faces [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window&module=13)
@@ -33,3 +34,5 @@ URL parameters
     * `10` Grass growing across the screen [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window&module=10)
     * `11` A rotating field of blocks [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window&module=11)
     * `12` Hyperspace but creepers [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window&module=12)
+* `resources`
+  * The full path of an alternate `resources.zip`
