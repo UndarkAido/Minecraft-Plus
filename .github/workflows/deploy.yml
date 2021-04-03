@@ -27,7 +27,7 @@ jobs:
         run: |
           for d in pkg/*/; do
             zip ${d::-1}.zip $d*
-            rm -r pkg/$d
+            rm -r $d
           done
 
       - name: Deploy
