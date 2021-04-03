@@ -26,7 +26,10 @@ jobs:
       - name: Create resource ZIPs
         run: |
           for d in pkg/*/; do
-            zip ${d::-1}.zip $d*
+            (
+              cd $d
+              zip $(basename $d).zip *
+            )
             rm -r $d
           done
 
