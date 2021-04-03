@@ -28,7 +28,7 @@ jobs:
           for d in pkg/*/; do
             (
               cd $d
-              zip $(basename $d).zip *
+              zip ../$(basename $d).zip *
             )
             rm -r $d
           done
