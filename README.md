@@ -10,17 +10,22 @@ All copyright belongs to Mojang Studios
 * URLs are now relative for rehosting
 * The canvas is now initially sized properly
 * The canvas resizes when the window does
-  * The WASM can't seem to tell this is happening though.
+  * The WASM can't seem to be able to tell this is happening though
 * Load an alternate `resources.zip` with the `resources` parameter
+* Decrease contrast with the `opacity` and `background-color` parameters
 
 ## Usage
 URL parameters
 * `autorun`
-  * With no value it takes you striaght to the launch screen.
-  * With 'window' it opens a random module in windowed mode. [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window)
+  * With 'window' it opens a random module in windowed mode [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window)
+  * With no value it takes you striaght to the launch screen
+  * When not included you get the default slow that offers you a download of the `.scr` version and lets you choose between fullscreen and windowed mode
+* `background-color`
+  * Takes a CSS color
+  * Inactive unless `opacity` is set
+  * With no value defaults to `white`
 * `module`
-  * With no value it defaults to `0`.
-  * With a parameter it loads the specified module instead of a random one. Input is `% max`.
+  * With a parameter it loads the specified module instead of a random one. Input is `% max`
     * `0` A rotating block with random faces [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window&module=13)
     * `1` A DVD bounce with a trail [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window&module=1)
     * `2` A traditional DVD bunce [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window&module=2)
@@ -34,5 +39,9 @@ URL parameters
     * `10` Grass growing across the screen [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window&module=10)
     * `11` A rotating field of blocks [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window&module=11)
     * `12` Hyperspace but creepers [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window&module=12)
+  * With no value it defaults to `0`
+* `opacity`
+  * Set the opacity of the canvas with a decimal where `0 <= x <= 1`
+  * With no value it defaults to `1`
 * `resources`
   * The full path of an alternate `resources.zip`
