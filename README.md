@@ -26,7 +26,7 @@ URL parameters
   * With no value defaults to `white`
 * `module`
   * With a parameter it loads the specified module instead of a random one. Input is `% max`
-    * `0` A rotating block with random faces [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window&module=13)
+    * `0` A rotating block with random faces [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window&module=0)
     * `1` A DVD bounce with a trail [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window&module=1)
     * `2` A traditional DVD bunce [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window&module=2)
     * `3` Litters random items on the ground [\[link\]](https://undarkaido.github.io/Minecraft-Plus/?autorun=window&module=3)
