@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta content="text/html" http-equiv="Content-Type"/>
+    <title>Minecraft Plus!</title>
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+
+    <!-- I definitely wasn’t hired for my webdev skills haha -->
+    <style type="text/css">
+      html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      body {
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 1.5;
+      }
+
+      #panel {
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        margin: 0 auto;
+      }
+
+      .controls:not([hidden]) {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .controls img {
+        margin-bottom: 20px;
+      }
+
+      .controls * {
+        text-align: center;
+      }
+
+      .controls a {
+        text-decoration: none;
+        display: inline-block;
+
+        background-color: #34aa2f !important;
+        border-color: #34aa2f !important;
+        text-decoration: none;
+        font-weight: 700;
+        text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+        color: #fff !important;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 0.5rem 3.25rem !important;
+        font-size: 19.2px !important;
+        line-height: 1.5;
+      }
+
+      .alt {
+        text-transform: uppercase;
+      }
+      .alt::before {
+        content: "~";
+      }
+      .alt::after {
+        content: "~";
+      }
+    </style>
+  </head>
+  <body>
+    <!-- What is this? Where are all the libraries? This is never going to work in IE -->
+    <script type="module">
+      import init, { start, pick_splash } from './pkg/mcse_web.js';
+
+      function swapElements(toHide, toShow) {
+        document.getElementById(toHide).hidden = true;
+        document.getElementById(toShow).hidden = false;
+      }
+
+      async function run(params) {
+        swapElements("start", "status-resources");
+        swapElements("header-product", "header-squid");
+
+		let resources_source = params.get("resources");
+        let resource_request = await fetch(resources_source ? resources_source : "./pkg/resources.zip");
+        let resource_data = await resource_request.arrayBuffer();
+
+        swapElements("status-resources", "status-code");
+        await init();
+        console.log(pick_splash());
+
+        let canvas = document.createElement("canvas");
+		
+		let opacity = params.get("opacity");
+		let background_color = params.get("background-color");
+		if(opacity){
+			canvas.setAttribute('style', 'opacity:' + opacity);
+			if(background_color){
+				document.body.setAttribute('style', 'background-color:' + background_color);
+			}
+		}
+		
+        document.body.appendChild(canvas);
+
+        let autorun = params.get("autorun");
+
+        let start_display = function() {
+          document.body.style.lineHeight = 0;
+          document.getElementById("panel").remove();
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          function windowResize() {
+            canvas.width  = window.innerWidth;
+            canvas.height = window.innerHeight;
+          };
+          window.addEventListener('resize', windowResize);
+          start(canvas, params.get("module"), resource_data);
+        };
+
+        if (autorun == "window") {
+          start_display();
+        } else {
+          swapElements("status-code", "select");
+
+          document.getElementById("fullscreen").onclick = function() {
+            canvas.requestFullscreen()
+              .then(start_display)
+              .catch(function(e) {
+                console.log("Failed to request fullscreen", e);
+                start_display();
+              }
+            );
+          };
+
+          document.getElementById("window").onclick = start_display;
+        }
+      }
+
+      window.onload = function() {
+        let params = new URLSearchParams(window.location.search);
+        if (params.has("autorun")) {
+          run(params);
+        } else {
+          document.getElementById("webgl").onclick = function() {
+            run(params);
+          }
+        }
+      };
+    </script>
+
+    <!-- Is that written by hand? Puzzling! -->
+    <div id="panel" aria-live="polite">
+      <div id="header-product" class="controls">
+        <div><img src="box.jpg" alt="The Product" /></div>
+      </div>
+      <div hidden id="header-squid" class="controls">
+        <div><img src="glowsquid.gif" alt="Glowsquid goes 'whoosh'" /></div>
+      </div>
+
+      <div id="start" class="controls">
+        <div>Thank you for choosing Minecraft Plus! as your primary source of entertainment!</div>
+        <a href="./screensaver.zip" download>Download for Desktop</a>
+        <div><sub>(available only for fairly modern Windows x64)</sub></div>
+        <div><sub>(<b>Note</b>: actual executable screen saver. Like we had in the 90's)</sub></div>
+        <div class="alt">or</div>
+        <a id="webgl" href="#">Run in Browser</a>
+        <div><sub>(requires browser with adequate amount of modern magic)</sub></div>
+      </div>
+
+      <div hidden id="status-resources" class="controls" role="status">
+        <div>Downloading resources</div>
+      </div>
+
+      <div hidden id="status-code" class="controls" role="status">
+        <div>Downloading code</div>
+      </div>
+
+      <div hidden id="select" class="controls">
+        <div>All done!</div>
+        <a id="fullscreen" href="#">Run in fullscreen</a>
+        <div class="alt">or</div>
+        <a id="window" href="#">Run windowed</a>
+      </div>
+    </div>
+  </body>
+</html>
