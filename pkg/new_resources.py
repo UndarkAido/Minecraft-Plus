@@ -77,6 +77,31 @@ def copy_min_files(resources_path, dest_path):
         shutil.copytree(os.path.join(resources_path, d), os.path.join(dest_path, d))
 
 
+def copy_panorama(resources_path, dest_path):
+    if os.path.isdir(os.path.join(resources_path, "assets/minecraft/textures/gui/title/background")):
+        shutil.copytree(os.path.join(resources_path, "assets/minecraft/textures/gui/title/background"), os.path.join(dest_path, 'panoramas/background'))
+        with open(os.path.join(dest_path, 'panoramas.txt'), 'w') as txt:
+            print("background", file=txt)
+    else:
+        print(' Not found...', end='')
+
+
+def create_creeper_png(res, resources_path, dest_path):
+    if os.path.isfile(os.path.join(resources_path, "assets/minecraft/textures/entity/creeper/creeper.png")):
+        with Image.open(os.path.join(resources_path, "assets/minecraft/textures/entity/creeper/creeper.png")) as img:
+            width, height = img.size
+            img.crop((height/4, height/4, height/2, height/2)).save(os.path.join(dest_path, 'creeper.png'))
+    else:
+        print(' Not found...', end='')
+
+
+def copy_footprint(resources_path, dest_path):
+    if os.path.isfile(os.path.join(resources_path, "assets/minecraft/textures/particle/footprint.png")):
+        shutil.copy(os.path.join(resources_path, "assets/minecraft/textures/particle/footprint.png"), os.path.join(dest_path, 'footprint.png'))
+    else:
+        print(' Not found...', end='')
+
+
 # Based in part on a script by ewanhowell5195#5195 on the DokuCraft Discord https://discord.gg/2MB8bRQ
 def create_full_blocks_png(block_list, res, size, source_path, dest_path):
     if len(block_list) > pow(size, 2):
@@ -172,6 +197,15 @@ def main():
     print(' Done.')
     print('Creating full_blocks.png...', end='')
     create_full_blocks_png(args.fullblocklist, args.resolution, 32, args.tmp, args.destination)
+    print(' Done.')
+    print('Copying default panorama...', end='')
+    copy_panorama(args.tmp, args.destination)
+    print(' Done.')
+    print('Creating creeper.png...', end='')
+    create_creeper_png(args.resolution, args.tmp, args.destination)
+    print(' Done.')
+    print('Copying footprint...', end='')
+    copy_footprint(args.tmp, args.destination)
     print(' Done.')
     print('Cleaning up...', end='')
     shutil.rmtree(args.tmp)
