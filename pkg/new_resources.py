@@ -102,6 +102,27 @@ def copy_footprint(resources_path, dest_path):
         print(' Not found...', end='')
 
 
+def copy_grass(resources_path, dest_path):
+    if os.path.isfile(os.path.join(resources_path, "assets/minecraft/textures/block/dirt.png")):
+        os.mkdir(os.path.join(dest_path, 'grass'))
+        shutil.copy(os.path.join(resources_path, "assets/minecraft/textures/block/dirt.png"), os.path.join(dest_path, 'grass/dirt.png'))
+    else:
+        print(' Dirt not found...', end='')
+    if os.path.isfile(os.path.join(resources_path, "assets/minecraft/textures/block/grass_block_top.png")):
+        if not os.path.isdir(os.path.join(dest_path, 'grass')):
+            os.mkdir(os.path.join(dest_path, 'grass'))
+        shutil.copy(os.path.join(resources_path, "assets/minecraft/textures/block/grass_block_top.png"), os.path.join(dest_path, 'grass/grass.png'))
+    else:
+        print(' Grass not found...', end='')
+    if os.path.isfile(os.path.join(resources_path, "assets/minecraft/textures/colormap/grass.png")):
+        if not os.path.isdir(os.path.join(dest_path, 'grass')):
+            os.mkdir(os.path.join(dest_path, 'grass'))
+        with Image.open(os.path.join(resources_path, "assets/minecraft/textures/colormap/grass.png")) as image:
+            ImageOps.flip(image).save(os.path.join(dest_path, 'grass/colors.png'))
+    else:
+        print(' Colors not found...', end='')
+
+
 # Based in part on a script by ewanhowell5195#5195 on the DokuCraft Discord https://discord.gg/2MB8bRQ
 def create_full_blocks_png(block_list, res, size, source_path, dest_path):
     if len(block_list) > pow(size, 2):
@@ -206,6 +227,9 @@ def main():
     print(' Done.')
     print('Copying footprint...', end='')
     copy_footprint(args.tmp, args.destination)
+    print(' Done.')
+    print('Copying grass...', end='')
+    copy_grass(args.tmp, args.destination)
     print(' Done.')
     print('Cleaning up...', end='')
     shutil.rmtree(args.tmp)
